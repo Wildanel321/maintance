@@ -1,75 +1,399 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Situs Sedang Maintenance</title>
-  <meta name="description" content="Kami sedang melakukan perawatan singkat. Kembali segera!" />
-  <style>
-    :root{
-      --bg1:#0f1724;
-      --bg2:#081028;
-      --accent:#7dd3fc;
-      --accent-2:#a78bfa;
-      --muted:rgba(255,255,255,0.65);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family:'Poppins',sans-serif;
-      background: radial-gradient(1200px 600px at 10% 20%, rgba(167,139,250,0.08), transparent 6%),
-                  radial-gradient(1000px 500px at 90% 80%, rgba(125,211,252,0.06), transparent 6%),
-                  linear-gradient(180deg,var(--bg1),var(--bg2));
-      color:#e6eef8;
-      display:flex;align-items:center;justify-content:center;
-      padding:32px;text-align:center;
-    }
-    .card{
-      background:rgba(255,255,255,0.04);
-      padding:40px 30px;
-      border-radius:20px;
-      box-shadow:0 8px 30px rgba(0,0,0,0.4);
-      backdrop-filter:blur(6px);
-      max-width:500px;width:100%;
-      animation:fadeIn 1.5s ease;
-    }
-    h1{font-size:2rem;margin-bottom:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;color:transparent}
-    p{color:var(--muted);margin-bottom:20px;line-height:1.6}
-    .gear{
-      width:100px;height:100px;margin:0 auto 20px auto;
-      animation:spin 6s linear infinite;
-      filter:drop-shadow(0 4px 10px rgba(0,0,0,0.4));
-    }
-    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    button{
-      background:linear-gradient(90deg,var(--accent),var(--accent-2));
-      border:none;
-      color:#06202b;
-      padding:10px 16px;
-      border-radius:10px;
-      font-weight:700;
-      cursor:pointer;
-      transition:opacity .3s;
-    }
-    button:hover{opacity:.85}
-    footer{margin-top:20px;font-size:13px;color:rgba(255,255,255,0.4)}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance - Sedang Dalam Perbaikan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #000814;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 2rem;
+            max-width: 800px;
+            background: rgba(0, 10, 30, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 195, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00c3ff, #0066ff, #00c3ff, #0066ff);
+            border-radius: 22px;
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #00c3ff;
+            text-shadow: 0 0 10px #00c3ff, 0 0 20px #00c3ff, 0 0 30px #0066ff;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        .maintenance-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            color: #00c3ff;
+            text-shadow: 0 0 15px #00c3ff, 0 0 30px #0066ff;
+            animation: spin 4s linear infinite;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #a0e7ff;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            background: rgba(0, 20, 40, 0.8);
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 65%;
+            background: linear-gradient(90deg, #0066ff, #00c3ff);
+            border-radius: 10px;
+            animation: progressAnimation 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shine 2s ease-in-out infinite;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .countdown-item {
+            background: rgba(0, 20, 40, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 80px;
+            box-shadow: 0 0 15px rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00c3ff;
+            text-shadow: 0 0 10px #00c3ff;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: #a0e7ff;
+            margin-top: 0.5rem;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 195, 255, 0.3);
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            color: #00c3ff;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px #00c3ff;
+        }
+
+        .social-icon:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px #ffffff, 0 0 25px #00c3ff;
+            transform: translateY(-3px);
+        }
+
+        /* Animasi */
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 10px #00c3ff, 0 0 20px #00c3ff, 0 0 30px #0066ff;
+            }
+            to {
+                text-shadow: 0 0 15px #00c3ff, 0 0 25px #00c3ff, 0 0 40px #0066ff, 0 0 50px #0066ff;
+            }
+        }
+
+        @keyframes borderGlow {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes progressAnimation {
+            0%, 100% {
+                width: 65%;
+            }
+            50% {
+                width: 70%;
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+
+        .circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-duration: 20s;
+        }
+
+        .circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            right: 10%;
+            animation-duration: 25s;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-duration: 15s;
+            animation-delay: 1s;
+        }
+
+        .circle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            bottom: 10%;
+            right: 20%;
+            animation-duration: 18s;
+            animation-delay: 3s;
+        }
+
+        .circle:nth-child(5) {
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            left: 5%;
+            animation-duration: 22s;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .maintenance-icon {
+                font-size: 4rem;
+            }
+            
+            .countdown {
+                gap: 1rem;
+            }
+            
+            .countdown-item {
+                min-width: 70px;
+                padding: 0.8rem;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <svg class="gear" viewBox="0 0 100 100">
-      <path fill="none" stroke="url(#grad)" stroke-width="5" stroke-linecap="round" d="M50 25a25 25 0 1 0 0 50 25 25 0 0 0 0-50zM50 10v15M50 75v15M10 50h15M75 50h15M23 23l10 10M67 67l10 10M23 77l10-10M67 33l10-10"/>
-      <defs>
-        <linearGradient id="grad" x1="0" x2="1">
-          <stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#a78bfa"/>
-        </linearGradient>
-      </defs>
-    </svg>
-    <h1>Website Sedang Maintenance</h1>
-    <p>Kami sedang melakukan perawatan sistem untuk peningkatan performa dan keamanan. Mohon bersabar, situs akan kembali segera dengan tampilan yang lebih baik.</p>
-    <button onclick="location.reload()">Coba Lagi</button>
-    <footer>© 2025 Website Anda — Semua hak dilindungi.</footer>
-  </div>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="maintenance-icon">⚙️</div>
+        <h1>MAINTENANCE</h1>
+        <p>Website kami sedang dalam proses perbaikan untuk memberikan pengalaman yang lebih baik. Mohon maaf atas ketidaknyamanannya.</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        
+        <p>Perkiraan waktu selesai:</p>
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-value" id="days">02</div>
+                <div class="countdown-label">Hari</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="hours">12</div>
+                <div class="countdown-label">Jam</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="minutes">45</div>
+                <div class="countdown-label">Menit</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="seconds">30</div>
+                <div class="countdown-label">Detik</div>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <p>Untuk pertanyaan mendesak, hubungi kami di:</p>
+            <p>Email: support@example.com</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon">📧</a>
+                <a href="#" class="social-icon">💬</a>
+                <a href="#" class="social-icon">📞</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const targetDate = new Date();
+            targetDate.setDate(now.getDate() + 2); // 2 hari dari sekarang
+            targetDate.setHours(now.getHours() + 12); // 12 jam dari sekarang
+            targetDate.setMinutes(now.getMinutes() + 45); // 45 menit dari sekarang
+            targetDate.setSeconds(now.getSeconds() + 30); // 30 detik dari sekarang
+            
+            const timeDifference = targetDate - now;
+            
+            if (timeDifference <= 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+            
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Update countdown setiap detik
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Panggil sekali saat pertama kali load
+    </script>
 </body>
 </html>
